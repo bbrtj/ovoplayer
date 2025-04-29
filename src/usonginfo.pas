@@ -105,7 +105,6 @@ type
     procedure edTitleChange(Sender: TObject);
     procedure edTrackChange(Sender: TObject);
     procedure edYearChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -205,6 +204,10 @@ begin
   //    if Tlabel(Components[i]).OptimalFill then
   //      Tlabel(Components[i]).AdjustFontForOptimalFill;
 
+  if lbFiles.Count > 0 then
+    lbFiles.Selected[0] := True;
+
+  lbFilesSelectionChange(lbFiles, True);
 end;
 
 procedure TfSongInfo.lbFilesMouseLeave(Sender: TObject);
@@ -409,15 +412,6 @@ end;
 procedure TfSongInfo.edYearChange(Sender: TObject);
 begin
   CheckModified(idYear, edYear.Caption);
-end;
-
-procedure TfSongInfo.FormActivate(Sender: TObject);
-begin
-  if lbFiles.Count > 0 then
-    lbFiles.Selected[0] := True;
-
-  lbFilesSelectionChange(lbFiles, True);
-
 end;
 
 procedure TfSongInfo.meCommentChange(Sender: TObject);

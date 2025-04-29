@@ -247,7 +247,7 @@ procedure TfSongInfo.lbFilesSelectionChange(Sender: TObject; User: boolean);
 var
   ts: TTabSheet;
 begin
-  if lbFiles.SelCount = 1 then
+  if (lbFiles.SelCount = 1) and (lbFiles.ItemIndex <> -1) then
   begin
     ts := pcSongInfo.ActivePage;
     leFileName.Caption := fTagList[lbFiles.ItemIndex].FileName;
@@ -528,6 +528,7 @@ end;
 
 procedure TfSongInfo.ShowTags(Tags: TCommonTags; Modified: TIDFieldsSet);
 begin
+  if lbFiles.ItemIndex < 0 then exit;
   if fTagList[lbFiles.ItemIndex].TagReader.isUpdateable then
     begin
        edAlbum.ReadOnly := false;
